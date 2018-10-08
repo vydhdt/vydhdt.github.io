@@ -16,14 +16,16 @@
     <script src="/js/jquery-1.11.1.min.js"></script>
     <script src="/js/jquery.mobile-1.4.5.min.js"></script>
 	
-	<!-- Google Analytics -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-44395211-1"></script>
 	<script>
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-44395211-2', 'auto');
-	ga('send', 'pageview');
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-44395211-1');
 	</script>
-	<script async src='https://www.google-analytics.com/analytics.js'></script>
-	<!-- End Google Analytics -->
+
 </head>
 <body>
 <div data-role="page" id="splash" style="background-color:#fff;">
