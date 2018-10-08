@@ -1,1 +1,139 @@
-"Hello World" 
+
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ thống kết nối Viện Y Dược Học Dân Tộc</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/css/jquery.mobile-1.4.5.min.css" />
+    <style>
+        .ui-icon-loading {
+            background: url("/logo/ajax-loader.gif") !important;
+        }
+    </style>
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script src="/js/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+<body>
+<div data-role="page" id="splash" style="background-color:#fff;">
+    <div class="splash" style="display: table-cell; vertical-align: middle; border: 0px solid red; text-align: center;">
+        <img id="splash_img" data-other-src="/logo/VYDHDT-logo.gif" src="/logo/VYDHDT-logo.gif" alt="splash" />
+        <div id="loiChao" style="color: #B5B5B5; font-size:36px">WiFi <img width="24px" src="/logo/wifi_icon.png" alt="WiFi" /></div>
+        <ul data-role="listview" data-filter="false" data-inset="true">
+			<li>
+                <div><center><a target="_blank" href="#"><img width="48px" src="/logo/vn.png" alt="vn" /></a> <a target="_blank" href="#"><img width="48px" src="/logo/uk.png" alt="uk" /></a></center>
+				<div style="margin: 15px 0px 15px 0px; font-size:16px; font-weight: bold;"><center>Hệ thống kết nối Viện Y Dược học dân tộc</center></div>
+				</div>
+            </li>
+            <li class="ui-field-contain">
+                <input id="thecao" placeholder="Xin nhập số điện thoại" name="thecao" type="text" value="">
+            </li>
+            <li class="ui-field-contain">
+                
+                <input id="mavip" placeholder="Xin nhập ngày sinh (ddmmyyyy)" name="mavip" type="text" value="">
+            </li>
+        </ul>
+        <form method="POST" action="/authorize" accept-charset="UTF-8" data-ajax="false">
+            <input type="hidden" name="_token" value="9eLGDuVxAai0OtEQf4E5VRGaJcg3Cz6XmAv7x3bQ">
+            <p>(Vui lòng chờ 6 giây sau khi nhấn nút "truy cập hệ thống"!)</p>
+            <input id="truyCapHeThong" name="submit" type="submit" value="Truy cập hệ thống">
+        </form>
+		<div style="background-color: #369F9A; text-shadow: 0 0px 0 #f3f3f3; font-size:12px; font-weight: normal; color: #fff; margin-top: 40px; padding: 15px 0px 10px 0px;">
+		<div style="margin-bottom:20px">Theo dõi chúng tôi tại: <a target="_blank" href="http://vienydhdt.gov.vn"><img width="24px" src="/logo/w.png" alt="w" /></a> <a target="_blank" href="http://fb.me/vienyduochocdantoc"><img width="24px" src="/logo/fb.png" alt="fb" /></a> <a target="_blank" href="http://www.youtube.com/channel/UC5wLjP7-3ykKihxmRiWL7Yw"><img width="24px" src="/logo/yt.png" alt="yt" /></a></div>
+		<div style="line-height: 1.5;">Địa chỉ: Số 273 - 275 Nguyễn Văn Trỗi, Phường 10, Q.Phú Nhuận, TP.Hồ Chí Minh <br />
+1. Điện thoại: (028) 38443047 <br />
+2. Đường dây nóng: 0964392632 <br />
+3. Tư vấn về khám chữa bệnh: 0941573926 <br />
+4. Tư vấn về đào tạo: 0917144980 <br />
+Fax: (028) 39972864 <br />
+Contact us: v.ydhdt@tphcm.gov.vn</div>
+		</div>
+    </div>
+    <script>
+        $( "#splash" ).on( "pagecreate", function( event, ui ) {
+            //var curUrl = window.location.href;
+            //var nextUrl = $.mobile.path.makeUrlAbsolute( "/login", window.location.href );
+
+            //var pReload = false;
+
+            //if (curUrl !== nextUrl){
+            //} else {
+            //    pReload = true;
+            //}
+
+
+            var ratioScale = 0.3;
+            var loiChao = "Hệ thống kết nối Viện Y Dược Học Dân Tộc";
+
+            var spinners = [
+                "◐◓◑◒",
+                "◴◷◶◵",
+                "▤▧▥▨",
+                ["◡◡","⊙⊙", "◠◠"],
+                "⣾⣽⣻⢿⡿⣟⣯⣷",
+                "◇◈◆"
+            ];
+
+            var i1 = 0;
+            var spinner = spinners[0];
+
+            var countSpace = 0;
+            var spaceChar = ["", " ", "  ", "   ", "  ", " "];
+
+            var fx = function(){
+                txtFX = loiChao + spaceChar[countSpace] + "-" + spinner[i1] + "-";
+
+                countSpace = (countSpace + 1) % spaceChar.length;
+                i1 = (i1 + 1) % spinner.length;
+                $("#loiChao").html(txtFX);
+            };
+			
+			$('#truyCapHeThong').on('click', function() {
+            $("#splash_img").attr({
+                src: $("#splash_img").attr('data-other-src')
+            });
+        });
+
+
+            var timer;
+            function showMessage() {
+                if (loiChao.length > 0) {
+                    timer = setInterval(fx, 300);
+                }
+            }
+
+            function getImageW(){
+                var iWidth = $( window ).width() < $( window ).height() ? $( window ).width()*ratioScale : $( window ).height()*ratioScale;
+                iWidth = iWidth < 160 ? 160 : iWidth;
+                return iWidth;
+            }
+
+            $(document).ready(function() {
+                //showMessage();
+                $(".splash").css({width: $(window).width(), height: $(window).height()});
+                $("#splash_img").css({width: getImageW()});
+            });
+
+            $( window ).resize(function() {
+                $(".splash").css({width:$( window ).width(), height: $( window ).height()});
+                $("#splash_img").css({width:getImageW()});
+            });
+
+            // setTimeout(function() {
+            // $.mobile.pageContainer.pagecontainer('change', "/login", {
+            // transition: "pop",
+            // changeHash: true,
+            // showLoadMsg: false,
+            // reload: pReload
+            // });
+            // clearInterval(timer);
+            // }, 2000 );
+        } );
+    </script>
+</div>
+
+</body>
+</html>
